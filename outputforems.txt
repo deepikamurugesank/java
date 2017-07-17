@@ -1,0 +1,185 @@
+MariaDB [(none)]> use Employee_Management_System
+Database changed
+
+Display Employee:
+***************
+MariaDB [Employee_Management_System]> select * from Employee;
++--------+----------+--------------+------------+------------------------------+
+------------+
+| emp_id | emp_name | team_name    | doj        | emp_email                    |
+ emp_salary |
++--------+----------+--------------+------------+------------------------------+
+------------+
+|      1 | bhuvi    | Ntrust_team  | 2017-07-07 | bhuvi@kggroup.com            |
+      35000 |
+|      2 | brighty  | DBL_team     | 2017-05-07 | brighty.m@kggroup.com        |
+      25000 |
+|      3 | deepika  | Dolphin_team | 2017-06-01 | deepikamurugesan81@gmail.com |
+      30000 |
+|      4 | suriya   | Ntrust_team  | 2017-05-01 | suriya@gmail.com             |
+      40000 |
+|      5 | sheba    | Ecampus_team | 2017-07-01 | sheba@gmail.com              |
+      50000 |
+|      6 | sathish  | Dolphin_team | 2017-06-01 | sathish@gmail.com            |
+       2000 |
+|      7 | mouli    | Ecampus_team | 2017-06-01 | mouli@gmail.com              |
+      55000 |
+|      8 | tiny     | DBL_team     | 2017-05-01 | tiny@gmail.com               |
+      70000 |
++--------+----------+--------------+------------+------------------------------+
+------------+
+8 rows in set (0.00 sec)
+
+display Project:
+*************
+
+MariaDB [Employee_Management_System]> select * from Project;
++--------+---------+----------+
+| pro_id | team_id | pro_name |
++--------+---------+----------+
+|    101 |     201 | DBL      |
+|    102 |     202 | Dolphin  |
+|    103 |     203 | Ntrust   |
+|    104 |     204 | Ecampus  |
++--------+---------+----------+
+4 rows in set (0.00 sec)
+
+Display Team:
+**************
+
+MariaDB [Employee_Management_System]> select * from Team;
++---------+--------------+
+| team_id | team_name    |
++---------+--------------+
+|     201 | DBL_team     |
+|     202 | Dolphin_team |
+|     203 | Ntrust_team  |
+|     204 | Ecampus_team |
++---------+--------------+
+4 rows in set (0.00 sec)
+
+Display Projectemployee:
+*********************
+
+MariaDB [Employee_Management_System]> select * from Projectemployee;
++-------------+------------+
+| employee_id | project_id |
++-------------+------------+
+|           1 |        103 |
+|           2 |        101 |
+|           3 |        102 |
+|           4 |        103 |
+|           5 |        104 |
+|           6 |        102 |
+|           7 |        104 |
+|           8 |        101 |
++-------------+------------+
+8 rows in set (0.00 sec)
+
+Top 5 Employee get highest salary:
+*********************************
+
+MariaDB [Employee_Management_System]> select emp_name,team_name,doj,emp_email,em
+p_salary from Employee order by emp_salary desc limit 5;
++----------+--------------+------------+-------------------+------------+
+| emp_name | team_name    | doj        | emp_email         | emp_salary |
++----------+--------------+------------+-------------------+------------+
+| tiny     | DBL_team     | 2017-05-01 | tiny@gmail.com    |      70000 |
+| mouli    | Ecampus_team | 2017-06-01 | mouli@gmail.com   |      55000 |
+| sheba    | Ecampus_team | 2017-07-01 | sheba@gmail.com   |      50000 |
+| suriya   | Ntrust_team  | 2017-05-01 | suriya@gmail.com  |      40000 |
+| bhuvi    | Ntrust_team  | 2017-07-07 | bhuvi@kggroup.com |      35000 |
++----------+--------------+------------+-------------------+------------+
+5 rows in set (0.00 sec)
+
+Range wise Salray List:
+********************
+
+MariaDB [Employee_Management_System]> select emp_name,team_name,doj,emp_email,em
+p_salary from Employee where emp_salary>=50000;
++----------+--------------+------------+-----------------+------------+
+| emp_name | team_name    | doj        | emp_email       | emp_salary |
++----------+--------------+------------+-----------------+------------+
+| sheba    | Ecampus_team | 2017-07-01 | sheba@gmail.com |      50000 |
+| mouli    | Ecampus_team | 2017-06-01 | mouli@gmail.com |      55000 |
+| tiny     | DBL_team     | 2017-05-01 | tiny@gmail.com  |      70000 |
++----------+--------------+------------+-----------------+------------+
+
+3 rows in set (0.00 sec)
+
+Display Employee List Based on Employee_id
+*************************************
+
+MariaDB [Employee_Management_System]> select emp_name,team_name,doj,emp_email,em
+p_salary from Projectemployee p,Employee e where p.employee_id=e.emp_id;
++----------+--------------+------------+------------------------------+---------
+---+
+| emp_name | team_name    | doj        | emp_email                    | emp_sala
+ry |
++----------+--------------+------------+------------------------------+---------
+---+
+| bhuvi    | Ntrust_team  | 2017-07-07 | bhuvi@kggroup.com            |      350
+00 |
+| brighty  | DBL_team     | 2017-05-07 | brighty.m@kggroup.com        |      250
+00 |
+| deepika  | Dolphin_team | 2017-06-01 | deepikamurugesan81@gmail.com |      300
+00 |
+| suriya   | Ntrust_team  | 2017-05-01 | suriya@gmail.com             |      400
+00 |
+| sheba    | Ecampus_team | 2017-07-01 | sheba@gmail.com              |      500
+00 |
+| sathish  | Dolphin_team | 2017-06-01 | sathish@gmail.com            |       20
+00 |
+| mouli    | Ecampus_team | 2017-06-01 | mouli@gmail.com              |      550
+00 |
+| tiny     | DBL_team     | 2017-05-01 | tiny@gmail.com               |      700
+00 |
++----------+--------------+------------+------------------------------+---------
+---+
+8 rows in set (0.00 sec)
+
+List of Employee Team or Project:
+****************************
+MariaDB [Employee_Management_System]> select emp_name,team_name,doj,emp_email,em
+p_salary,pro_id,pro_name from Projectemployee pe,Employee e,Project p  where pe.
+employee_id=e.emp_id AND pe.project_id=p.pro_id;
++----------+--------------+------------+------------------------------+---------
+---+--------+----------+
+| emp_name | team_name    | doj        | emp_email                    | emp_sala
+ry | pro_id | pro_name |
++----------+--------------+------------+------------------------------+---------
+---+--------+----------+
+| brighty  | DBL_team     | 2017-05-07 | brighty.m@kggroup.com        |      250
+00 |    101 | DBL      |
+| tiny     | DBL_team     | 2017-05-01 | tiny@gmail.com               |      700
+00 |    101 | DBL      |
+| deepika  | Dolphin_team | 2017-06-01 | deepikamurugesan81@gmail.com |      300
+00 |    102 | Dolphin  |
+| sathish  | Dolphin_team | 2017-06-01 | sathish@gmail.com            |       20
+00 |    102 | Dolphin  |
+| bhuvi    | Ntrust_team  | 2017-07-07 | bhuvi@kggroup.com            |      350
+00 |    103 | Ntrust   |
+| suriya   | Ntrust_team  | 2017-05-01 | suriya@gmail.com             |      400
+00 |    103 | Ntrust   |
+| sheba    | Ecampus_team | 2017-07-01 | sheba@gmail.com              |      500
+00 |    104 | Ecampus  |
+| mouli    | Ecampus_team | 2017-06-01 | mouli@gmail.com              |      550
+00 |    104 | Ecampus  |
++----------+--------------+------------+------------------------------+---------
+---+--------+----------+
+8 rows in set (0.00 sec)
+
+Range wise salary list(2)
+*******************
+
+
+MariaDB [Employee_Management_System]> select emp_name,team_name,doj,emp_email,em
+p_salary from Employee where emp_salary between 50000 AND 90000;
++----------+--------------+------------+-----------------+------------+
+| emp_name | team_name    | doj        | emp_email       | emp_salary |
++----------+--------------+------------+-----------------+------------+
+| sheba    | Ecampus_team | 2017-07-01 | sheba@gmail.com |      50000 |
+| mouli    | Ecampus_team | 2017-06-01 | mouli@gmail.com |      55000 |
+| tiny     | DBL_team     | 2017-05-01 | tiny@gmail.com  |      70000 |
++----------+--------------+------------+-----------------+------------+
+3 rows in set (0.02 sec)
